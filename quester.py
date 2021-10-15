@@ -95,6 +95,7 @@ class Quester:
         self.current_map = "\n".join(self.current_map)
 
     def town_map(self):
+        self.refresh_map()
         print(self.current_map)
 
     def advance(self):
