@@ -31,7 +31,7 @@ class Quester:
         print(" _______    _       _    ________    _______    _________    ________    _____  \n|  ___  |  | |     | |  |  ______|  |  _____|  |___   ___|  |  ______|  |  _  |\n| |   | |  | |     | |  | |______   | |_____       | |      | |______   | |_| |\n| |   | |  | |     | |  |  ______|  |_____  |      | |      |  ______|  |    _|\n| |  \\\\ |  | |     | |  | |               | |      | |      | |         | |\\ \\\n| |___\\\\|  | |_____| |  | |______    _____| |      | |      | |______   | | \\ \\\n|______\\\\  |_________|  |________|  |_______|      |_|      |________|  |_|  \\_\\")
         print("\n================================================================================\n")
 
-        character_creation = self.get_selected_option(("1", "2"), "Would you like to\n1)Load a player save\n2)Create a new player\n>>>", "Please select either '1' or '2'.")
+        character_creation = self.get_selected_option(("1", "2"), "Would you like to\n1) Load a player save\n2) Create a new player\n>>> ", "Please select either '1' or '2'.")
 
         create_new = character_creation == "2"
 
@@ -45,7 +45,7 @@ class Quester:
         self.commands = {"h":self.print_commands, "ld":self.player.load, "a":self.advance, "s":self.player.save, "exit":self.exit_game, "mp":self.town_map, "rs":self.player.rest, "dev":self.player.set_unbeatable}
 
         self.player.print_status()
-        command = self.get_selected_option(self.commands, ">>>", "'{}' is not a valid command.").lower()
+        command = self.get_selected_option(self.commands, ">>> ", "'{}' is not a valid command.").lower()
         self.commands[command]()
 
 
@@ -143,7 +143,7 @@ class Quester:
         self.player.visited_cities.append(town_name)
         while True:
             self.player.print_status()
-            enter = self.get_selected_option(("1", "2", "3"), "What would you like to do\n1)Enter the marketplace\n2)Enter the wizard's hut\n3)Leave the town\n>>>","Please select an option '1' through '3'")
+            enter = self.get_selected_option(("1", "2", "3"), "What would you like to do\n1) Enter the marketplace\n2) Enter the wizard's hut\n3) Leave the town\n>>> ","Please select an option '1' through '3'")
             if enter == "1":
                 while self.encounter_location_marketplace():
                     continue
@@ -151,7 +151,7 @@ class Quester:
                 while self.encounter_location_wizards_hut():
                     continue
             if enter == "3":
-                leave = input("Are you sure you want to leave the town of {}? (y/n)\n>>>".format(town_name)).lower()
+                leave = input("Are you sure you want to leave the town of {}? (y/n)\n>>> ".format(town_name)).lower()
                 if leave == "y":
                     print("You left {}.".format(town_name))
                     del self.next_locations[0]
@@ -165,11 +165,11 @@ class Quester:
         
         self.player.print_status()
         print("You entered the marketplace.")
-        purchase = self.get_selected_option(("1", "2", "3"), "What would you like to buy?\n1)Gold - {0} loot for one piece\n2)Food - {1} gold for one piece\n3)Exit\n>>>".format(round(gold_price, 2), round(food_price, 2)), "Please select an option '1' through '3'")
+        purchase = self.get_selected_option(("1", "2", "3"), "What would you like to buy?\n1) Gold - {0} loot for one piece\n2) Food - {1} gold for one piece\n3) Exit\n>>> ".format(round(gold_price, 2), round(food_price, 2)), "Please select an option '1' through '3'")
         
         if purchase == "1":
             try:
-                amount = input("How much gold would you like to buy?\n>>>")
+                amount = input("How much gold would you like to buy?\n>>> ")
                 if amount == "max":
                     amount = round(self.player.loot / gold_price)
                 else:
@@ -180,7 +180,7 @@ class Quester:
                 cost = floor(amount * gold_price)
                 if cost == 0 and amount > 0:
                     cost = 1
-                confirm = input("That will cost {} loot. Are you sure you want to make the purchase? (y/n)\n>>>".format(cost)).lower()
+                confirm = input("That will cost {} loot. Are you sure you want to make the purchase? (y/n)\n>>> ".format(cost)).lower()
                 if confirm == "y":
                     if self.player.loot >= cost:
                         self.player.loot -= cost
@@ -191,7 +191,7 @@ class Quester:
 
         elif purchase == "2":
             try:
-                amount = input("How much food would you like to buy?\n>>>")
+                amount = input("How much food would you like to buy?\n>>> ")
                 if amount == "max":
                     amount = round(self.player.gold / food_price)
                 else:
@@ -202,7 +202,7 @@ class Quester:
                 cost = floor(amount * food_price)
                 if cost == 0 and amount > 0:
                     cost = 1
-                confirm = input("That will cost {} gold. Are you sure you want to make the purchase? (y/n)\n>>>".format(cost)).lower()
+                confirm = input("That will cost {} gold. Are you sure you want to make the purchase? (y/n)\n>>> ".format(cost)).lower()
                 if confirm == "y":
                     if self.player.gold >= cost:
                         self.player.gold -= cost
@@ -226,7 +226,7 @@ class Quester:
           
         self.player.print_status()
         print("You entered the wizard's hut.")
-        purchase = self.get_selected_option(("1","2","3","4","5","6","7"), "Wizard: How can I help you today?\n1)Heal - restore full health for {0} gold\n2)Mana potion - restore to full mana for {1} gold\n3)Strength potion - increase Strength by 1 point for {2} gold\n4)Health potion - increase max health by 1 point for {3} gold\n5)Max mana upgrade - increade max mana by 1 point for {4} gold\n6)Mana increase upgrade - increase mana growth by 1 point for {5} gold\n7)Exit\n>>>".format(round(heal_price, 2), round(mana_price, 2), round(strength_price, 2), round(health_price, 2), round(max_mana_price, 2), round(mana_growth_price, 2)), "Please select an option '1' through '7'.")
+        purchase = self.get_selected_option(("1","2","3","4","5","6","7"), "Wizard: How can I help you today?\n1) Heal - restore full health for {0} gold\n2) Mana potion - restore to full mana for {1} gold\n3) Strength potion - increase Strength by 1 point for {2} gold\n4) Health potion - increase max health by 1 point for {3} gold\n5) Max mana upgrade - increade max mana by 1 point for {4} gold\n6) Mana increase upgrade - increase mana growth by 1 point for {5} gold\n7) Exit\n>>> ".format(round(heal_price, 2), round(mana_price, 2), round(strength_price, 2), round(health_price, 2), round(max_mana_price, 2), round(mana_growth_price, 2)), "Please select an option '1' through '7'.")
 
         if purchase != "7":
             cost = round(price_list[int(purchase) - 1]) 
@@ -279,7 +279,7 @@ class Quester:
             print("The traveler offers to give you {0} {1} in exchange for {2} {3}.\nUnfortunately, you do not have enough {3}.\nYou and the traveler continue on your seperate ways.".format(tradeable_amount, tradeable, payment_amount, payment))
             return None
         
-        trade = self.get_selected_option(("y", "n"), "The traveler offers to give you {0} {1} in exchange for {2} {3}. Do you accept? (y/n)\n>>>".format(tradeable_amount, tradeable, payment_amount, payment), "Please use 'y' or 'n'.").lower()
+        trade = self.get_selected_option(("y", "n"), "The traveler offers to give you {0} {1} in exchange for {2} {3}. Do you accept? (y/n)\n>>> ".format(tradeable_amount, tradeable, payment_amount, payment), "Please use 'y' or 'n'.").lower()
         if trade == "y":
             print("You and the traveler exchange items.")
             tradeables_reference[payment] -= payment_amount
@@ -301,7 +301,7 @@ class Quester:
         companion.init_companion()
 
         print("You come across a(n) {0}, {1} the {2}, who offers to join you on your adventure. He has {3} health and {4} strength.".format(companion.character_class, companion.name, companion.species, companion.health, companion.strength))
-        accept_companion = self.get_selected_option(("y", "n"), "Do you accept the companion? He will replace any current companion. (y/n)\n>>>", "Please use 'y' or 'n'.")
+        accept_companion = self.get_selected_option(("y", "n"), "Do you accept the companion? He will replace any current companion. (y/n)\n>>> ", "Please use 'y' or 'n'.")
         if accept_companion == "y":
             self.companion = companion
             print("{} is now your companion.".format(self.companion.name))
@@ -309,7 +309,7 @@ class Quester:
             print("You decline the {}'s offer and go on your way.".format(companion.name))
             
     def encounter_dungeon(self):
-        enter_dungeon = self.get_selected_option(("y", "n"), "You encountered a dungeon. Would you like to enter? (y/n)\n>>>", "Please use 'y' or 'n'.")
+        enter_dungeon = self.get_selected_option(("y", "n"), "You encountered a dungeon. Would you like to enter? (y/n)\n>>> ", "Please use 'y' or 'n'.")
         if enter_dungeon == "y":
             self.in_dungeon = True
             self.dungeon = Dungeon(self)
@@ -317,7 +317,7 @@ class Quester:
             self.in_dungeon = False
 
     def exit_game(self):
-        leave_game = input("Are you sure you want to exit the game? (y/n)\n>>>").lower()
+        leave_game = input("Are you sure you want to exit the game? (y/n)\n>>> ").lower()
         if leave_game == "y":
             exit()
         else:

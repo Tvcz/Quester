@@ -28,8 +28,8 @@ class Player(Creature):
         if not create_new:
             return self.load()
 
-        name = input("Enter a name for your character:\n>>>")
-        character_class = input("Select a character class:\n1)Archer\n2)Assassin\n3)Berserker\n4)Mage\n5)Warrior\n>>>")
+        name = input("Enter a name for your character:\n>>> ")
+        character_class = input("Select a character class:\n1) Archer\n2) Assassin\n3) Berserker\n4) Mage\n5) Warrior\n>>> ")
         if not character_class in ("1", "2", "3", "4", "5"):
             print("Please enter a number 1 through 5.")
             return False
@@ -64,7 +64,7 @@ class Player(Creature):
             
 
     def load(self):
-        save_name = input("Enter the name of your save or leave blank for default:\n>>>").lower()
+        save_name = input("Enter the name of your save or leave blank for default:\n>>> ").lower()
         try:
             with open(save_name + " quester_save.txt", "r") as load_file:
                 load_file = load_file.read()
@@ -90,7 +90,7 @@ class Player(Creature):
 
         print("Save found: {0} the {1}\nHealth : {3}/{2} ({4}%)\nStrength : {5}\nGold : {6}\nLoot : {7}\nMana : {8}/{14} ({15}%)\nMana growth : {9}\nFood : {10}\nEnemies defeated : {11}\nBosses defeated : {12}\nVisited cities : {13}".format(self.name, self.character_class, self.max_health, self.health, round(float(self.health) / int(self.max_health) * 100, 2), self.strength, self.gold, self.loot, self.mana, self.mana_growth, self.food, self.enemies_defeated, self.bosses_defeated, ", ".join(self.visited_cities), self.max_mana, round((int(self.mana) / int(self.max_mana)) * 100, 2)))
 
-        select_save = input("\nWould you like to select this save? (y/n)\n>>>").lower()
+        select_save = input("\nWould you like to select this save? (y/n)\n>>> ").lower()
         if select_save != "y" and select_save != "n":
             print("Please input 'y' or 'n'.")
             return False
@@ -98,7 +98,7 @@ class Player(Creature):
         return select_save == "y"
 
     def save(self):
-        save_name = input("Enter a name for your save or leave blank for default:\n>>>").lower()
+        save_name = input("Enter a name for your save or leave blank for default:\n>>> ").lower()
 
         confirmation = self.quester.get_selected_option(("y", "n"), 'Are you sure you want to overwrite save "{}"? (y/n)\n>>>'.format(save_name), "Please use 'y' or 'n'.")
         if confirmation == "y":
@@ -210,7 +210,7 @@ class Player(Creature):
 
     def set_unbeatable(self):
         print("Enter the dev password:")
-        password = input(">>>")
+        password = input(">>> ")
         if password != "nuffun":
             print("Incorrect password!")
             return None

@@ -22,7 +22,7 @@ class Battlefield:
             if len(self.enemies) > 0:
                 print("SELECTED TARGET: {0} the {1} {2} ({3} health)".format(self.current_enemy.name, self.current_enemy.species, self.current_enemy.character_class, self.current_enemy.health))    
 
-            command = player.quester.get_selected_option(("at", "ab", "re", "st", "h", "ce"), ">>>", "'{}' is either not a valid command or cannot be used in battle.")
+            command = player.quester.get_selected_option(("at", "ab", "re", "st", "h", "ce"), ">>> ", "'{}' is either not a valid command or cannot be used in battle.")
             if command == "at":
                 self.battle_commands[command](self.current_enemy)
             elif command == "re":
@@ -35,7 +35,7 @@ class Battlefield:
             elif command == "ce":
                 for monster in self.enemies:
                     print("[{0}] {1}, {2} the {3}. {4} health. ".format(monster.number, monster.character_class, monster.name, monster.species, monster.health))
-                current_enemy_number = int(player.quester.get_selected_option([str(n) for n in range(1, len(self.enemies) + 1)], "Select an enemy by entering their number.\n>>>", "Please enter a number between 1 and {}.".format(len(self.enemies))))
+                current_enemy_number = int(player.quester.get_selected_option([str(n) for n in range(1, len(self.enemies) + 1)], "Select an enemy by entering their number.\n>>> ", "Please enter a number between 1 and {}.".format(len(self.enemies))))
                 for monster in self.enemies:
                     if monster.number == current_enemy_number:
                         self.current_enemy = monster

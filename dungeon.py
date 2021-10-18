@@ -75,7 +75,7 @@ class Dungeon:
         self.print_dungeon()
         self.dungeon_grid[self.quester.player.dungeon_location[1]][self.quester.player.dungeon_location[0]].remove(self.quester.player)
         while True:
-            direction = self.quester.get_selected_option(("n", "s", "e", "w"), "Select a direction to move towards. (n/s/e/w)\n>>>", "Please use 'n', 's', 'e', or 'w'.")
+            direction = self.quester.get_selected_option(("n", "s", "e", "w"), "Select a direction to move towards. (n/s/e/w)\n>>> ", "Please use 'n', 's', 'e', or 'w'.")
             if direction == "n" and self.quester.player.dungeon_location[1] < len(self.dungeon_grid) - 1:
                 self.quester.player.dungeon_location[1] += 1
             elif direction == "s" and self.quester.player.dungeon_location[1] > 0:
@@ -96,7 +96,7 @@ class Dungeon:
     def get_command(self):
         self.print_dungeon()
         self.commands = {"rs":self.quester.player.rest, "mp":self.print_dungeon, "h":self.print_commands, "leave":self.exit_dungeon, "st":self.quester.player.print_status}
-        command = self.quester.get_selected_option(("rs", "mv", "mp", "h", "leave", "st"), ">>>", "'{}' is not a valid command.")
+        command = self.quester.get_selected_option(("rs", "mv", "mp", "h", "leave", "st"), ">>> ", "'{}' is not a valid command.")
         if command == "mv":
             self.move()
             self.enter_room()
@@ -109,7 +109,7 @@ class Dungeon:
             print("{0} : {1}".format(command, self.command_descriptions[command]))
 
     def exit_dungeon(self):
-        leave = input("Are you sure you want to exit the dungeon? (y/n)\n>>>").lower()
+        leave = input("Are you sure you want to exit the dungeon? (y/n)\n>>> ").lower()
         if leave == "y":
             self.in_dungeon = False
 
